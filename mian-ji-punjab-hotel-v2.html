@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Mian Ji Punjab Hotel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f3f7ff;--fg:#0f1e3d;--card:#fff;--ac:#1a56c4;--ac2:#0b2f6b;--mut:#5b6a8a;--bd:#d8e2f5;--bad:#c0352b;--ok:#17803d}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1220;--fg:#e8efff;--card:#131d33;--ac:#5b9bff;--ac2:#9cc2ff;--mut:#9fb0d0;--bd:#26345a;--bad:#ff8a7e;--ok:#5fd68a}}
+:root[data-theme=dark]{--bg:#0b1220;--fg:#e8efff;--card:#131d33;--ac:#5b9bff;--ac2:#9cc2ff;--mut:#9fb0d0;--bd:#26345a;--bad:#ff8a7e;--ok:#5fd68a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:72px}
+header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--ac);color:#fff}
+.logo{width:38px;height:38px;border-radius:50%;background:#fff;color:var(--ac2);display:grid;place-items:center;font:800 15px Georgia,serif;flex:none}
+header h1{margin:0;font:700 17px Georgia,serif;letter-spacing:.4px}header small{opacity:.85;font-size:12px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;border:0;background:none;color:var(--mut);padding:12px 2px;font-size:12px}nav .on{color:var(--ac);font-weight:700;border-top:3px solid var(--ac)}
+main{max-width:760px;margin:0 auto;padding:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:10px;box-shadow:0 1px 3px rgba(20,60,140,.06)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd);flex-wrap:wrap}.row:last-child{border:0}
+button,select,input,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px}
+button{background:var(--ac);color:#fff;border:0;cursor:pointer}button.g{background:none;color:var(--ac);border:1px solid var(--ac)}button.d{background:var(--bad)}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;padding-bottom:2px}.chips button{white-space:nowrap;background:var(--card);color:var(--fg);border:1px solid var(--bd)}.chips .on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.q{display:flex;align-items:center;gap:8px}.q button{width:34px;padding:6px}
+.tag{font-size:11px;background:var(--ac);color:#fff;border-radius:6px;padding:2px 7px}.tag.w{background:#b7791f}.low{color:var(--bad);font-weight:700}.mut{color:var(--mut);font-size:13px}.ok{color:var(--ok)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}.stat{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;font-size:13px;color:var(--mut)}.stat b{display:block;font-size:18px;color:var(--ac)}
+.qrs{display:grid;grid-template-columns:1fr 1fr;gap:10px}.qrc{text-align:center}.qrc svg{width:100%;height:auto;background:#fff;border-radius:8px;padding:4px}
+input[type=number]{width:84px}.w100{width:100%}h3{margin:14px 0 8px;color:var(--ac2)}pre{white-space:pre-wrap;font-size:12px;margin:6px 0}
+#toast{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);background:var(--ac2);color:#fff;padding:8px 14px;border-radius:20px;opacity:0;transition:.3s;z-index:9;max-width:90%}
+@media(min-width:600px){.qrs{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<header><div class="logo">MJ</div><div><h1>MIAN JI PUNJAB HOTEL</h1><small id="sub">Desi · BBQ · Karahi · Bisyan / Balakot</small></div></header>
+<main id="v"></main><div id="toast"></div><nav id="nav"></nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),fmt=n=>'PKR '+Math.round(n).toLocaleString('en-PK');
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const m=(id,n,c,p,s,r,d,pt)=>({id,n,c,p,s,r:r||{},d:d||'',pt:pt||15,av:true});
+const MENU=[m('b1','Omelette','Breakfast',150,'Breakfast',{egg:2,oil:.02},'Fresh desi omelette',10),m('b2','Tandoori Paratha','Breakfast',80,'Breakfast',{flour:.15},'Hot from the tandoor',10),
+m('l1','Lunch Package (per person)','Lunch',850,'Karahi',{rice:.15,chicken:.2},'Complete lunch meal',20),m('l2','Desi Daal Chawal','Lunch',350,'Karahi',{rice:.2},'Home-style daal with rice',15),
+m('d1','Dinner Package (per person)','Dinner',1000,'Karahi',{rice:.15,chicken:.25},'Complete dinner meal',25),m('d2','Chicken Karahi','Dinner',2200,'Karahi',{chicken:1,oil:.15},'1 kg, cooked fresh',30),m('d3','Mutton Karahi','Dinner',3800,'Karahi',{mutton:1,oil:.15},'1 kg, cooked fresh',40),m('d4','Lebanese Mutton','Dinner',3200,'BBQ',{mutton:1},'Slow-cooked Lebanese style',40),m('d5','BBQ Chicken Tikka','Dinner',450,'BBQ',{chicken:.25},'Charcoal grilled',20),
+m('p1','BBQ Platter','Platters',2500,'BBQ',{chicken:.5,mutton:.3},'Mixed BBQ selection',30),m('p2','Family Platter','Platters',4500,'BBQ',{chicken:1,mutton:.5},'Serves 4-5',40),m('p3','Special Platter','Platters',3500,'BBQ',{chicken:.7,mutton:.4},'Chef special',35),
+m('k1','Apple Shake','Drinks',250,'Drinks',{},'',5),m('k2','Mango Shake','Drinks',250,'Drinks',{},'',5),m('k3','Lassi','Drinks',150,'Drinks',{},'',5),m('k4','Mango Lassi','Drinks',220,'Drinks',{},'',5),
+m('t1','Cold Drink','Tech Shop',120,'Shop',{cola:1},'',1),m('t2','Mineral Water','Tech Shop',80,'Shop',{water:1},'',1),m('t3','Biscuits','Tech Shop',50,'Shop',{bisc:1},'',1)];
+const STOCK=[['chicken','Chicken','kg',20,5,900],['mutton','Mutton','kg',10,3,2400],['rice','Rice','kg',25,5,320],['flour','Flour','kg',30,8,140],['oil','Cooking Oil','L',15,4,520],['egg','Eggs','pcs',60,12,35],['cola','Cold Drinks (shop)','btl',48,10,85],['water','Water (shop)','btl',48,10,50],['bisc','Biscuits (shop)','pkt',40,10,30]].map(a=>({id:a[0],n:a[1],u:a[2],q:a[3],min:a[4],cost:a[5]}));
+const mkT=n=>Array.from({length:n},(_,i)=>({code:'T'+String(i+1).padStart(2,'0'),on:true}));
+let S=null;try{S=JSON.parse(localStorage.getItem('mj2'))}catch(e){}
+if(!S)S={seq:1,orders:[],exp:[],reqs:[],mv:[],scans:{},tax:0,svc:5,cats:['Breakfast','Lunch','Dinner','Platters','Drinks','Tech Shop'],menu:MENU,stock:STOCK,tables:mkT(60),base:'',adm:'',sp:'',info:'Bisyan / Balakot, Pakistan · Open daily'};
+const save=()=>{try{localStorage.setItem('mj2',JSON.stringify(S))}catch(e){}};
+const it=id=>S.menu.find(x=>x.id===id),sk=id=>S.stock.find(x=>x.id===id),lbl=c=>'MJ-'+c;
+const tok=c=>{let h=0;for(const ch of c+'mjph26')h=(h*31+ch.charCodeAt(0))>>>0;return h.toString(36).slice(0,4).padStart(4,'0')};
+const sha=s=>crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''));
+const base=()=>(S.base||location.href).split('#')[0],tUrl=t=>base()+'#'+t.code+'-'+tok(t.code);
+function qrSvg(u){const q=qrcode(0,'M');q.addData(u);q.make();return q.createSvgTag(4,2)}
+let authed=false,sauth=false,fails=0,lockUntil=0,atab='dash',tab='menu',cat=null,tbl='Takeaway',cart={},note='',kst='All';
+function toast(t){const e=$('#toast');e.textContent=t;e.style.opacity=1;setTimeout(()=>e.style.opacity=0,2400)}
+const sel=(a,v)=>a.map(x=>`<option ${x==v?'selected':''}>${esc(x)}</option>`).join('');
+function tot(o){const sub=o.items.reduce((a,x)=>a+(it(x.id)?it(x.id).p:0)*x.q,0),d=sub*(o.disc||0)/100,b=sub-d,sv=b*S.svc/100,tx=b*S.tax/100;return{sub,d,sv,tx,t:b+sv+tx}}
+function cogs(o){return o.items.reduce((a,x)=>a+(it(x.id)?Object.entries(it(x.id).r).reduce((b,[k,q])=>b+q*x.q*(sk(k)?sk(k).cost:0),0):0),0)}
+function ctx(){const h=location.hash.slice(1);if(h==='admin')return{m:'admin'};const r=/^(T\d+)-(\w+)$/.exec(h);if(r){const t=S.tables.find(x=>x.code===r[1]);if(!t||r[2]!==tok(r[1]))return{m:'bad'};if(!t.on)return{m:'off'};return{m:'cust',t:r[1]}}return{m:'staff'}}
+/* ---------- MENU / ORDER ---------- */
+function vMenu(lock){const cats=S.cats;if(!cat||!cats.includes(cat))cat=cats[0];const items=S.menu.filter(x=>x.c===cat&&x.av),cur=lock?lbl(lock):tbl,my=S.orders.filter(o=>o.t===cur&&!o.paid),ci=Object.entries(cart).filter(e=>e[1]>0&&it(e[0])),total=ci.reduce((a,[k,q])=>a+it(k).p*q,0);
+const acts=S.tables.filter(t=>t.on).map(t=>lbl(t.code));
+return `<div class=card>${lock?`<b>Welcome! You are at table ${esc(cur)}</b>`:`<label>Table <select onchange="tbl=this.value;render()">${sel(['Takeaway',...acts],tbl)}</select></label>`}
+<div style="margin-top:8px"><button class=g onclick="req('${esc(cur)}','Call Waiter')">Call Waiter</button> <button class=g onclick="req('${esc(cur)}','Bill Request')">Request Bill</button></div></div>
+<div class=chips>${cats.map(c=>`<button class="${c==cat?'on':''}" onclick="cat='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div>
+${cat=='Lunch'||cat=='Dinner'?`<p class=mut>Package prices are per person. Service charge (${S.svc}%) and tax (${S.tax}%) are charged separately.</p>`:''}
+<div class=card>${items.map(x=>`<div class=row><div style="flex:1">${esc(x.n)}<div class=mut>${fmt(x.p)} · ~${x.pt} min</div>${x.d?`<div class=mut>${esc(x.d)}</div>`:''}</div><div class=q><button onclick="adj('${x.id}',-1)">−</button><b>${cart[x.id]||0}</b><button onclick="adj('${x.id}',1)">+</button></div></div>`).join('')||'<p class=mut>No items in this category</p>'}</div>
+<div class=card><b>Your cart</b>${ci.map(([k,q])=>`<div class=row><span>${q}× ${esc(it(k).n)}</span><span>${fmt(it(k).p*q)}</span></div>`).join('')||'<p class=mut>Cart is empty</p>'}
+<textarea class=w100 placeholder="Special instructions" oninput="note=this.value">${esc(note)}</textarea>
+<div class=row><b>${fmt(total)}</b><button onclick="place('${esc(cur)}')">Place order</button></div></div>
+${my.length?`<div class=card><b>Your orders · ${esc(cur)}</b>${my.map(o=>`<div class=row><span>${o.id} · ${o.items.map(x=>x.q+'× '+esc(it(x.id)?it(x.id).n:'?')).join(', ')}</span><span class=tag>${o.st}</span></div>`).join('')}</div>`:''}
+${lock?`<div class=card><b>Restaurant information</b><div class=mut>${esc(S.info)}</div></div>`:''}`}
+function adj(id,d){cart[id]=Math.max(0,(cart[id]||0)+d);render()}
+function req(t,type){S.reqs.push({id:Date.now(),t,type});save();toast(type+' sent')}
+function place(t){const items=Object.entries(cart).filter(e=>e[1]>0).map(([id,q])=>({id,q}));if(!items.length)return toast('Cart is empty');
+S.orders.push({id:'MJ-'+String(S.seq++).padStart(4,'0'),t,items,note,st:'new',time:new Date().toLocaleTimeString()});cart={};note='';save();toast('Order sent to kitchen');render()}
+/* ---------- KITCHEN / POS ---------- */
+const NEXT={new:['preparing','Start preparing'],preparing:['ready','Mark ready'],ready:['served','Mark served']};
+function vKitchen(){const sts=['All','Karahi','BBQ','Drinks','Breakfast','Shop'];const os=S.orders.filter(o=>o.st!=='served'&&!o.paid&&(kst=='All'||o.items.some(x=>it(x.id)&&it(x.id).s==kst)));
+return `<div class=chips>${sts.map(s=>`<button class="${s==kst?'on':''}" onclick="kst='${s}';render()">${s}</button>`).join('')}</div>
+${S.reqs.map(r=>`<div class=card><div class=row><span><span class="tag w">${esc(r.type)}</span> ${esc(r.t)}</span><button onclick="S.reqs=S.reqs.filter(x=>x.id!=${r.id});save();render()">Done</button></div></div>`).join('')}
+${os.map(o=>`<div class=card><div class=row><b>${esc(o.t)} · ${o.id}</b><span class=tag>${o.st}</span></div>${o.items.map(x=>`<div>${x.q}× ${esc(it(x.id)?it(x.id).n:'?')} <span class=mut>[${it(x.id)?it(x.id).s:''}]</span></div>`).join('')}${o.note?`<div class=mut>Note: ${esc(o.note)}</div>`:''}<div class=mut>${o.time}</div><button style="margin-top:8px" onclick="adv('${o.id}')">${NEXT[o.st][1]}</button></div>`).join('')||'<p class=mut>No active orders</p>'}`}
+function adv(id){const o=S.orders.find(x=>x.id===id),n=NEXT[o.st][0];
+if(n==='preparing')o.items.forEach(x=>it(x.id)&&Object.entries(it(x.id).r).forEach(([k,q])=>{const s=sk(k);if(!s)return;s.q=Math.max(0,+(s.q-q*x.q).toFixed(3));S.mv.push(`${new Date().toLocaleString()} ${s.n} −${(q*x.q).toFixed(2)}${s.u} (${o.id})`)}));
+o.st=n;save();render()}
+function vPos(){const un=S.orders.filter(o=>!o.paid),pd=S.orders.filter(o=>o.paid).slice(-8).reverse();
+return `${un.map(o=>{const t=tot(o);return `<div class=card><div class=row><b>${esc(o.t)} · ${o.id}</b><span class=tag>${o.st}</span></div>${o.items.map(x=>`<div class=row><span>${x.q}× ${esc(it(x.id)?it(x.id).n:'?')}</span><span>${fmt((it(x.id)?it(x.id).p:0)*x.q)}</span></div>`).join('')}
+<div class=mut>Subtotal ${fmt(t.sub)} · Service ${S.svc}% · Tax ${S.tax}%</div>
+<div class=row><label>Discount % <input id="d${o.id}" type=number min=0 max=100 value="${o.disc||0}"></label><select id="m${o.id}">${sel(['Cash','JazzCash','Easypaisa','Bank Transfer','Card'],'Cash')}</select></div>
+<input id="r${o.id}" class=w100 placeholder="Transaction ref (digital payments)"><button class=w100 style="margin-top:8px" onclick="pay('${o.id}')">Take payment · ${fmt(t.t)}</button></div>`}).join('')||'<p class=mut>No unpaid orders</p>'}
+${pd.length?'<h3>Invoices</h3>':''}${pd.map(o=>`<div class=card><div class=row><span>${o.id} · ${fmt(tot(o).t)} · ${o.pm}</span>${o.ver?'<span class=tag>Verified</span>':`<button onclick="ver('${o.id}')">Verify</button>`}</div><details><summary class=mut>Invoice</summary><pre>${esc(inv(o))}</pre></details></div>`).join('')}`}
+function pay(id){const o=S.orders.find(x=>x.id===id),mm=$('#m'+id).value,r=$('#r'+id).value.trim();o.disc=Math.min(100,Math.max(0,+$('#d'+id).value||0));
+if(mm!=='Cash'&&!r)return toast('Transaction reference required');o.paid=true;o.pm=mm;o.ref=r;o.ver=mm==='Cash';o.paidAt=new Date().toLocaleString();save();toast(o.ver?'Payment received':'Recorded as UNVERIFIED');render()}
+function ver(id){S.orders.find(x=>x.id===id).ver=true;save();render()}
+function inv(o){const t=tot(o);return `MIAN JI PUNJAB HOTEL\nInvoice: INV-${o.id}\n${o.paidAt}  Table: ${o.t}\n`+o.items.map(x=>`${x.q} x ${it(x.id)?it(x.id).n:'?'} @ ${it(x.id)?it(x.id).p:0}`).join('\n')+`\nSubtotal: ${t.sub}\nDiscount: ${t.d.toFixed(0)}\nService: ${t.sv.toFixed(0)}  Tax: ${t.tx.toFixed(0)}\nTOTAL: ${fmt(t.t)}\nPaid by: ${o.pm}${o.ref?' ('+o.ref+')':''} · ${o.ver?'Verified':'Unverified'}`}
+/* ---------- ACCESS (admin + staff PIN) ---------- */
+function vStaffPin(){return `<div class=card><b>Staff PIN required</b><input id=sp type=password class=w100 placeholder="Staff PIN" style="margin:8px 0"><button class=w100 onclick="staffLogin()">Unlock</button></div>`}
+async function staffLogin(){if(await sha($('#sp').value)===S.sp){sauth=true;render()}else toast('Wrong PIN')}
+function vAdminLogin(){if(!S.adm)return `<div class=card><b>Create admin password</b><p class=mut>First-time setup. Minimum 6 characters.</p><input id=p1 type=password class=w100 placeholder="Password" style="margin:6px 0"><input id=p2 type=password class=w100 placeholder="Repeat password"><button class=w100 style="margin-top:8px" onclick="setAdmin()">Create admin account</button></div>`;
+return `<div class=card><b>Admin login</b><input id=p1 type=password class=w100 placeholder="Admin password" style="margin:8px 0"><button class=w100 onclick="adminLogin()">Login</button></div>`}
+async function setAdmin(){const a=$('#p1').value;if(a.length<6||a!==$('#p2').value)return toast('Min 6 chars, both must match');S.adm=await sha(a);save();authed=true;render()}
+async function adminLogin(){if(Date.now()<lockUntil)return toast('Too many attempts. Wait 30 seconds');if(await sha($('#p1').value)===S.adm){authed=true;fails=0;render()}else{if(++fails>=5){lockUntil=Date.now()+30000;fails=0}toast('Wrong password')}}
+/* ---------- ADMIN ---------- */
+function stats(){const pd=S.orders.filter(o=>o.paid),ok=pd.filter(o=>o.ver),sum=(a,f)=>a.reduce((x,o)=>x+f(o),0),rev=sum(ok,o=>tot(o).t),cash=sum(ok.filter(o=>o.pm=='Cash'),o=>tot(o).t),un=sum(pd.filter(o=>!o.ver),o=>tot(o).t),cg=sum(ok,cogs),ex=sum(S.exp,e=>e.a),net=sum(ok,o=>tot(o).t-tot(o).tx);return{rev,cash,dig:rev-cash,un,cg,ex,prof:net-cg-ex}}
+function aDash(){const s=stats(),best={};S.orders.forEach(o=>o.items.forEach(x=>best[x.id]=(best[x.id]||0)+x.q));const bs=Object.entries(best).filter(e=>it(e[0])).sort((a,b)=>b[1]-a[1]).slice(0,5),low=S.stock.filter(x=>x.q<=x.min),tsc=Object.values(S.scans).reduce((a,b)=>a+b,0);
+return `<div class=grid><div class=stat>Orders<b>${S.orders.length}</b></div><div class=stat>Verified revenue<b>${fmt(s.rev)}</b></div><div class=stat>Cash<b>${fmt(s.cash)}</b></div><div class=stat>Digital verified<b>${fmt(s.dig)}</b></div><div class=stat>Unverified digital<b>${fmt(s.un)}</b></div><div class=stat>Ingredient cost<b>${fmt(s.cg)}</b></div><div class=stat>Expenses<b>${fmt(s.ex)}</b></div><div class=stat>Net profit<b>${fmt(s.prof)}</b></div><div class=stat>QR scans (this device)<b>${tsc}</b></div><div class=stat>Low stock items<b class="${low.length?'low':''}">${low.length}</b></div></div>
+<div class=card><b>Best sellers</b>${bs.map(([k,q])=>`<div class=row><span>${esc(it(k).n)}</span><span>${q}</span></div>`).join('')||'<p class=mut>No sales yet</p>'}</div>
+${low.length?`<div class=card><b class=low>Low stock</b>${low.map(x=>`<div class=row><span>${esc(x.n)}</span><span>${x.q} ${x.u}</span></div>`).join('')}</div>`:''}`}
+function aMenu(){return `<div class=card><b>Add menu item</b><input id=an class=w100 placeholder="Item name" style="margin:6px 0"><div class=row><select id=ac>${sel(S.cats)}</select><input id=ap type=number placeholder="Price"><input id=at type=number placeholder="Prep min"></div>
+<input id=ad class=w100 placeholder="Description"><div class=row><span class=mut>Kitchen station</span><select id=as>${sel(['Karahi','BBQ','Drinks','Breakfast','Shop'])}</select></div><button class=w100 onclick="addItem()">Add item</button></div>
+<div class=card><b>Categories</b><div class=row><input id=nc placeholder="New category"><button onclick="addCat()">Add</button></div>${S.cats.map(c=>`<div class=row><span>${esc(c)}</span><button class=d onclick="delCat('${esc(c)}')">Delete</button></div>`).join('')}</div>
+<h3>All items</h3>${S.menu.map(x=>`<div class=card><div class=row><b>${esc(x.n)}</b><span class=mut>${esc(x.c)}</span></div><div class=row><label>Price <input type=number value=${x.p} onchange="it('${x.id}').p=+this.value;save();toast('Saved')"></label><label><input type=checkbox ${x.av?'checked':''} onchange="it('${x.id}').av=this.checked;save()"> Available</label><button class=d onclick="delItem('${x.id}')">Delete</button></div>
+<details><summary class=mut>Recipe (stock deduction)</summary>${Object.entries(x.r).map(([k,q])=>`<div class=row><span>${esc(sk(k)?sk(k).n:k)}: ${q}</span><button class=g onclick="delytR('${x.id}','${k}')">Remove</button></div>`).join('')}<div class=row><select id="ri${x.id}">${S.stock.map(s=>`<option value="${s.id}">${esc(s.n)} (${s.u})</option>`).join('')}</select><input id="rq${x.id}" type=number step=any placeholder="Qty"><button onclick="addR('${x.id}')">Add</button></div></details></div>`).join('')}`}
+function addItem(){const n=$('#an').value.trim(),p=+$('#ap').value;if(!n||!(p>0))return toast('Name and price required');S.menu.push({id:'x'+Date.now(),n,c:$('#ac').value,p,s:$('#as').value,r:{},d:$('#ad').value.trim(),pt:+$('#at').value||15,av:true});save();toast('Item added');render()}
+function delItem(id){S.menu=S.menu.filter(x=>x.id!==id);save();render()}
+function addCat(){const c=$('#nc').value.trim();if(!c||S.cats.includes(c))return toast('Enter a new name');S.cats.push(c);save();render()}
+function delCat(c){if(S.menu.some(x=>x.c===c))return toast('Remove its items first');S.cats=S.cats.filter(x=>x!==c);save();render()}
+function addR(id){const q=+$('#rq'+id).value;if(!(q>0))return toast('Enter quantity');it(id).r[$('#ri'+id).value]=q;save();render()}
+function delytR(id,k){delete it(id).r[k];save();render()}
+function aTables(){return `<div class=card><b>Tables and QR codes</b><p class=mut>Each table has its own QR code with a secure-style token. Paste your live website link in Settings before printing.</p>
+<div class=row><label>Number of tables <input id=tn type=number min=1 max=100 value=${S.tables.length}></label><button onclick="setTables()">Update</button></div>
+<div class=row><button onclick="dlSheet()">Download printable sheet (all QR)</button></div><p class=mut>Link used: ${esc(base())}</p></div>
+<div class=qrs>${S.tables.map(t=>`<div class="card qrc"><b>${lbl(t.code)}</b>${qrSvg(tUrl(t))}<div class=mut>Scans: ${S.scans[t.code]||0}</div><label class=mut><input type=checkbox ${t.on?'checked':''} onchange="togT('${t.code}',this.checked)"> Active</label><br><button class=g style="margin-top:6px" onclick="dlQr('${t.code}')">Download SVG</button></div>`).join('')}</div>`}
+function setTables(){const n=Math.min(100,Math.max(1,+$('#tn').value||1)),old=S.tables;S.tables=mkT(n).map(t=>old.find(o=>o.code===t.code)||t);save();render()}
+function togT(c,v){S.tables.find(t=>t.code===c).on=v;save()}
+async function dl(name,data,type){try{const d=await claude.use('downloads');if(!d)return toast('Download not available here');await d.save({filename:name,data:new Blob([data],{type})})}catch(e){toast('Download cancelled')}}
+function dlQr(c){const t=S.tables.find(x=>x.code===c);dl('MJ-'+c+'-QR.svg',qrSvg(tUrl(t)),'image/svg+xml')}
+function dlSheet(){const cards=S.tables.filter(t=>t.on).map(t=>`<div class="c"><div class="h">MIAN JI PUNJAB HOTEL</div>${qrSvg(tUrl(t))}<div class="t">${lbl(t.code)}</div><div class="s">Scan to view menu and order</div></div>`).join('');
+dl('MJ-table-QR-sheet.html',`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Table QR Codes</title><style>body{font-family:Arial,sans-serif;margin:0;padding:10mm}.g{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm}.c{border:2px solid #1a56c4;border-radius:10px;padding:8px;text-align:center;break-inside:avoid}.h{color:#0b2f6b;font-weight:700;font-size:12px}.c svg{width:100%;height:auto}.t{font-size:22px;font-weight:700;color:#1a56c4}.s{font-size:11px;color:#555}</style></head><body><div class="g">${cards}</div></body></html>`,'text/html')}
+function aStock(){return `<div class=card><b>Add stock item</b><input id=sn class=w100 placeholder="Item name" style="margin:6px 0"><div class=row><input id=su placeholder="Unit (kg)" style="width:90px"><input id=sq type=number step=any placeholder="Qty"><input id=sm type=number step=any placeholder="Min"><input id=sc type=number placeholder="Cost/unit"></div><button class=w100 onclick="addStock()">Add item</button></div>
+<div class=card>${S.stock.map(s=>`<div class=row><div>${esc(s.n)}<div class=mut>${s.q} ${esc(s.u)} · min ${s.min} · value ${fmt(s.q*s.cost)}</div>${s.q<=s.min?'<span class=low>Low stock</span>':''}</div><div class=q><input id="s${s.id}" type=number value=1 min=0 step=any><button onclick="mv('${s.id}',1)">+Buy</button><button class=g onclick="mv('${s.id}',-1)">Waste</button></div></div>`).join('')}</div>
+<div class=card><b>Recent movements</b>${S.mv.slice(-10).reverse().map(x=>`<div class=mut>${esc(x)}</div>`).join('')||'<p class=mut>None yet</p>'}</div>`}
+function addStock(){const n=$('#sn').value.trim();if(!n)return toast('Name required');S.stock.push({id:'s'+Date.now(),n,u:$('#su').value||'unit',q:+$('#sq').value||0,min:+$('#sm').value||0,cost:+$('#sc').value||0});save();render()}
+function mv(id,d){const s=sk(id),q=+$('#s'+id).value||0;s.q=Math.max(0,+(s.q+d*q).toFixed(3));S.mv.push(`${new Date().toLocaleString()} ${s.n} ${d>0?'purchase +':'wastage −'}${q}${s.u}`);save();render()}
+function aFin(){return `<div class=card><b>Add expense</b><div class=row><select id=ec>${sel(['Food purchases','Electricity','Gas','Water','Salaries','Maintenance','Rent','Transportation','Miscellaneous'])}</select><input id=ea type=number placeholder="Amount"><button onclick="addExp()">Add</button></div></div>
+<div class=card><b>Expense history</b>${S.exp.slice().reverse().slice(0,15).map(e=>`<div class=row><span>${esc(e.c)} <span class=mut>${esc(e.d||'')}</span></span><span>${fmt(e.a)}</span></div>`).join('')||'<p class=mut>No expenses</p>'}</div>`}
+function addExp(){const a=+$('#ea').value;if(!(a>0))return toast('Enter amount');S.exp.push({c:$('#ec').value,a,d:new Date().toLocaleDateString()});save();render()}
+function aSet(){return `<div class=card><b>Billing settings</b><div class=row><span>Tax %</span><input type=number step=any value=${S.tax} onchange="S.tax=+this.value||0;save();toast('Saved')"></div><div class=row><span>Service charge %</span><input type=number step=any value=${S.svc} onchange="S.svc=+this.value||0;save();toast('Saved')"></div></div>
+<div class=card><b>Restaurant</b><label class=mut>Info shown to customers</label><input class=w100 value="${esc(S.info)}" onchange="S.info=this.value;save()"><label class=mut>Live website link (used inside QR codes)</label><input class=w100 value="${esc(S.base)}" placeholder="https://..." onchange="S.base=this.value.trim();save();toast('Saved')"></div>
+<div class=card><b>Security</b><div class=row><input id=np type=password placeholder="New admin password"><button onclick="chPw()">Change</button></div><div class=row><input id=ns type=password placeholder="Staff PIN (empty = off)"><button onclick="chSp()">Set</button></div></div>
+<div class=card><p class=mut>Data is stored in this browser only. Passwords are hashed, but this is browser-level protection, not server security.</p><button class=d onclick="localStorage.removeItem('mj2');location.reload()">Reset all data</button></div>`}
+async function chPw(){const p=$('#np').value;if(p.length<6)return toast('Min 6 characters');S.adm=await sha(p);save();toast('Password changed')}
+async function chSp(){const p=$('#ns').value;S.sp=p?await sha(p):'';save();toast(p?'Staff PIN set':'Staff PIN off')}
+const ATABS=[['dash','Dashboard',aDash],['menu','Menu & Prices',aMenu],['tables','Tables & QR',aTables],['stock','Stock',aStock],['fin','Expenses',aFin],['set','Settings',aSet]];
+/* ---------- RENDER ---------- */
+const STAFF=[['menu','Order',()=>vMenu()],['kitchen','Kitchen',vKitchen],['pos','POS',vPos]];
+function render(){const c=ctx(),v=$('#v'),nav=$('#nav');nav.style.display='flex';
+if(c.m==='cust'){nav.style.display='none';try{if(!sessionStorage.getItem('sc'+c.t)){sessionStorage.setItem('sc'+c.t,1);S.scans[c.t]=(S.scans[c.t]||0)+1;save()}}catch(e){}v.innerHTML=vMenu(c.t);return}
+if(c.m==='bad'||c.m==='off'){nav.style.display='none';v.innerHTML=`<div class=card><b>${c.m=='bad'?'Invalid QR code':'This table is not active'}</b><p class=mut>Please ask a staff member for help.</p></div>`;return}
+if(c.m==='admin'){nav.innerHTML=`<button onclick="location.hash=''">← Staff screens</button>${authed?'<button onclick="authed=false;render()">Logout</button>':''}`;
+if(!authed){v.innerHTML=vAdminLogin();return}
+v.innerHTML=`<div class=chips>${ATABS.map(t=>`<button class="${t[0]==atab?'on':''}" onclick="atab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>`+ATABS.find(t=>t[0]==atab)[2]();return}
+nav.innerHTML=STAFF.map(t=>`<button class="${t[0]==tab?'on':''}" onclick="tab='${t[0]}';render()">${t[1]}${t[0]=='kitchen'&&S.orders.filter(o=>o.st=='new').length?' ('+S.orders.filter(o=>o.st=='new').length+')':''}</button>`).join('')+`<button onclick="location.hash='admin'">Admin</button>`;
+v.innerHTML=(S.sp&&!sauth)?vStaffPin():STAFF.find(t=>t[0]==tab)[2]()}
+window.addEventListener('hashchange',render);render();
+</script></body></html>
